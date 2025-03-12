@@ -1,597 +1,395 @@
-{
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Laravel API Documentation",
-        "description": "Dokumentasi API untuk User",
-        "contact": {
-            "name": "Support",
-            "email": "support@example.com"
-        },
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        },
-        "version": "1.0.0"
-    },
-    "paths": {
-        "/api/addresses": {
-            "get": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Get all addresses",
-                "operationId": "33ccea30443418dbab9242aa67931614",
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Create a new address",
-                "operationId": "5549e34fec9817a9794302a767fc7fde",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "street",
-                                    "city",
-                                    "province",
-                                    "country",
-                                    "postal_code"
-                                ],
-                                "properties": {
-                                    "street": {
-                                        "type": "string"
-                                    },
-                                    "city": {
-                                        "type": "string"
-                                    },
-                                    "province": {
-                                        "type": "string"
-                                    },
-                                    "country": {
-                                        "type": "string"
-                                    },
-                                    "postal_code": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Address created"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/addresses/{id}": {
-            "get": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Get address details",
-                "operationId": "de6419a46a2f3639437add4f3cb76e5d",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Address ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Address data"
-                    },
-                    "404": {
-                        "description": "Address not found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Update an address",
-                "operationId": "2f078db19c8d7e5a374faa4b048e4c45",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Address ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "street": {
-                                        "type": "string"
-                                    },
-                                    "city": {
-                                        "type": "string"
-                                    },
-                                    "province": {
-                                        "type": "string"
-                                    },
-                                    "country": {
-                                        "type": "string"
-                                    },
-                                    "postal_code": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Address updated"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Addresses"
-                ],
-                "summary": "Delete an address",
-                "operationId": "3380f49103f9fb0f4a126d324894a33a",
-                "responses": {
-                    "200": {
-                        "description": "Address deleted"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/contacts": {
-            "get": {
-                "tags": [
-                    "Contacts"
-                ],
-                "summary": "Get all contacts",
-                "operationId": "0f9efb5609dbb039b35ecafb28e492a2",
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Contacts"
-                ],
-                "summary": "Create a new contact",
-                "operationId": "a3b0baf957a16c1ed505f2e8985c254c",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "first_name",
-                                    "last_name",
-                                    "email",
-                                    "phone"
-                                ],
-                                "properties": {
-                                    "first_name": {
-                                        "type": "string"
-                                    },
-                                    "last_name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "phone": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Contact created"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/contacts/{id}": {
-            "get": {
-                "tags": [
-                    "Contacts"
-                ],
-                "summary": "Get contact details",
-                "operationId": "4b37f4c90f5cd7974a09bd688ac4d3dd",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Contact ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Contact data"
-                    },
-                    "404": {
-                        "description": "Contact not found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "Contacts"
-                ],
-                "summary": "Update a contact",
-                "operationId": "554514967b71c75698b6cef012de4420",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Contact ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "first_name": {
-                                        "type": "string"
-                                    },
-                                    "last_name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "format": "email"
-                                    },
-                                    "phone": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Contact updated"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Contacts"
-                ],
-                "summary": "Delete a contact",
-                "operationId": "3a78f2af1871a21a2b5a492134d72017",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Contact ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Contact deleted"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/users": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Register a new user",
-                "operationId": "3b201ddfd948f9d4114befe853f5872a",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "username",
-                                    "password",
-                                    "name"
-                                ],
-                                "properties": {
-                                    "username": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "User created"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    }
-                }
-            }
-        },
-        "/api/users/login": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Login a user",
-                "operationId": "c9b20e2431404b7383ce7e626b4b6f05",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "username",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "username": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string",
-                                        "format": "password"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User authenticated"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    }
-                }
-            }
-        },
-        "/api/users/{id}": {
-            "get": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Get user details",
-                "operationId": "36a33ff774d5cba33c039dec2c3e0287",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User data"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Update user information",
-                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User updated"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Delete a user",
-                "operationId": "fa56cffde745d3f152f95cbacd936c0b",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "User deleted"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            }
-        }
-    },
-    "tags": [
-        {
-            "name": "Addresses",
-            "description": "Addresses"
-        },
-        {
-            "name": "Contacts",
-            "description": "Contacts"
-        },
-        {
-            "name": "Users",
-            "description": "Users"
-        }
-    ]
-}
+openapi: 3.0.0
+info:
+  title: 'Laravel API Documentation'
+  description: 'Dokumentasi API untuk User'
+  contact:
+    name: Support
+    email: support@example.com
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  version: 1.0.0
+paths:
+  /api/addresses:
+    get:
+      tags:
+        - Addresses
+      summary: 'Get all addresses'
+      operationId: 33ccea30443418dbab9242aa67931614
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+      security:
+        -
+          bearerAuth: []
+    post:
+      tags:
+        - Addresses
+      summary: 'Create a new address'
+      operationId: 5549e34fec9817a9794302a767fc7fde
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - street
+                - city
+                - province
+                - country
+                - postal_code
+              properties:
+                street:
+                  type: string
+                city:
+                  type: string
+                province:
+                  type: string
+                country:
+                  type: string
+                postal_code:
+                  type: string
+              type: object
+      responses:
+        201:
+          description: 'Address created'
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          bearerAuth: []
+  '/api/addresses/{id}':
+    get:
+      tags:
+        - Addresses
+      summary: 'Get address details'
+      operationId: de6419a46a2f3639437add4f3cb76e5d
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Address data'
+        404:
+          description: 'Address not found'
+      security:
+        -
+          bearerAuth: []
+    put:
+      tags:
+        - Addresses
+      summary: 'Update an address'
+      operationId: 2f078db19c8d7e5a374faa4b048e4c45
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address ID'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                street:
+                  type: string
+                city:
+                  type: string
+                province:
+                  type: string
+                country:
+                  type: string
+                postal_code:
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Address updated'
+        400:
+          description: 'Bad Request'
+        404:
+          description: 'Not Found'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      tags:
+        - Addresses
+      summary: 'Delete an address'
+      operationId: 3380f49103f9fb0f4a126d324894a33a
+      responses:
+        200:
+          description: 'Address deleted'
+        404:
+          description: 'Not Found'
+      security:
+        -
+          bearerAuth: []
+  /api/contacts:
+    get:
+      tags:
+        - Contacts
+      summary: 'Get all contacts'
+      operationId: 0f9efb5609dbb039b35ecafb28e492a2
+      responses:
+        200:
+          description: Success
+        401:
+          description: Unauthorized
+      security:
+        -
+          bearerAuth: []
+    post:
+      tags:
+        - Contacts
+      summary: 'Create a new contact'
+      operationId: a3b0baf957a16c1ed505f2e8985c254c
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - first_name
+                - last_name
+                - email
+                - phone
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+              type: object
+      responses:
+        201:
+          description: 'Contact created'
+        400:
+          description: 'Bad Request'
+      security:
+        -
+          bearerAuth: []
+  '/api/contacts/{id}':
+    get:
+      tags:
+        - Contacts
+      summary: 'Get contact details'
+      operationId: 4b37f4c90f5cd7974a09bd688ac4d3dd
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Contact ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Contact data'
+        404:
+          description: 'Contact not found'
+      security:
+        -
+          bearerAuth: []
+    put:
+      tags:
+        - Contacts
+      summary: 'Update a contact'
+      operationId: 554514967b71c75698b6cef012de4420
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Contact ID'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'Contact updated'
+        400:
+          description: 'Bad Request'
+        404:
+          description: 'Not Found'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      tags:
+        - Contacts
+      summary: 'Delete a contact'
+      operationId: 3a78f2af1871a21a2b5a492134d72017
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Contact ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Contact deleted'
+        404:
+          description: 'Not Found'
+      security:
+        -
+          bearerAuth: []
+  /api/users:
+    post:
+      tags:
+        - Users
+      summary: 'Register a new user'
+      operationId: 3b201ddfd948f9d4114befe853f5872a
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+                - name
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                name:
+                  type: string
+              type: object
+      responses:
+        201:
+          description: 'User created'
+        400:
+          description: 'Bad Request'
+  /api/users/login:
+    post:
+      tags:
+        - Users
+      summary: 'Login a user'
+      operationId: c9b20e2431404b7383ce7e626b4b6f05
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+              type: object
+      responses:
+        200:
+          description: 'User authenticated'
+        401:
+          description: Unauthorized
+  '/api/users/{id}':
+    get:
+      tags:
+        - Users
+      summary: 'Get user details'
+      operationId: 36a33ff774d5cba33c039dec2c3e0287
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'User data'
+        404:
+          description: 'User not found'
+    put:
+      tags:
+        - Users
+      summary: 'Update user information'
+      operationId: b9091397c8b25f12c6adb74be6ce3a5a
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+              type: object
+      responses:
+        200:
+          description: 'User updated'
+        404:
+          description: 'User not found'
+    delete:
+      tags:
+        - Users
+      summary: 'Delete a user'
+      operationId: fa56cffde745d3f152f95cbacd936c0b
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: 'User deleted'
+        404:
+          description: 'User not found'
+tags:
+  -
+    name: Addresses
+    description: Addresses
+  -
+    name: Contacts
+    description: Contacts
+  -
+    name: Users
+    description: Users
