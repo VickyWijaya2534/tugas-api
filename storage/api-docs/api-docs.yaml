@@ -61,6 +61,27 @@ paths:
         -
           bearerAuth: []
   '/api/addresses/{id}':
+    get:
+      tags:
+        - Addresses
+      summary: 'Get address details'
+      operationId: de6419a46a2f3639437add4f3cb76e5d
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Address data'
+        404:
+          description: 'Address not found'
+      security:
+        -
+          bearerAuth: []
     put:
       tags:
         - Addresses
@@ -163,6 +184,27 @@ paths:
         -
           bearerAuth: []
   '/api/contacts/{id}':
+    get:
+      tags:
+        - Contacts
+      summary: 'Get contact details'
+      operationId: 4b37f4c90f5cd7974a09bd688ac4d3dd
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Contact ID'
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 'Contact data'
+        404:
+          description: 'Contact not found'
+      security:
+        -
+          bearerAuth: []
     put:
       tags:
         - Contacts
