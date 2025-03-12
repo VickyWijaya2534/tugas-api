@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddressRequest;
+use App\Http\Resources\AddressResource;
 use App\Models\Address;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Annotations as OA;
-
 
 class AddressController extends Controller
 {
@@ -16,14 +16,15 @@ class AddressController extends Controller
      *     path="/api/addresses",
      *     summary="Get all addresses",
      *     tags={"Addresses"},
-     *     security={{"bearerAuth":{}}},
+     *     security={{"bearerAuth":{}}}, 
      *     @OA\Response(response=200, description="Success"),
      *     @OA\Response(response=401, description="Unauthorized")
      * )
      */
     public function index(): JsonResponse
     {
-        return response()->json(Address::all());
+        $addresses = Address::all();
+        return response()->json(AddressResource::collection($addresses));
     }
 
     /**
@@ -31,7 +32,7 @@ class AddressController extends Controller
      *     path="/api/addresses",
      *     summary="Create a new address",
      *     tags={"Addresses"},
-     *     security={{"bearerAuth":{}}},
+     *     security={{"bearerAuth":{}}}, 
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -47,18 +48,33 @@ class AddressController extends Controller
      *     @OA\Response(response=400, description="Bad Request")
      * )
      */
-    public function store(Request $request): JsonResponse
+    public function store(AddressRequest $request): JsonResponse
     {
-        $data = $request->validate([
-            'street' => 'required|string',
-            'city' => 'required|string',
-            'province' => 'required|string',
-            'country' => 'required|string',
-            'postal_code' => 'required|string'
-        ]);
+        $address = Address::create($request->validated());
+        return response()->json(new AddressResource($address), 201);
+    }
 
-        $address = Address::create($data);
-        return response()->json($address, 201);
+    /**
+     * @OA\Get(
+     *     path="/api/addresses/{id}",
+     *     summary="Get address details",
+     *     tags={"Addresses"},
+     *     security={{"bearerAuth":{}}}, 
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="Address ID",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=200, description="Address data"),
+     *     @OA\Response(response=404, description="Address not found")
+     * )
+     */
+    public function show($id): JsonResponse
+    {
+        $address = Address::findOrFail($id);
+        return response()->json(new AddressResource($address));
     }
 
     /**
@@ -66,7 +82,7 @@ class AddressController extends Controller
      *     path="/api/addresses/{id}",
      *     summary="Update an address",
      *     tags={"Addresses"},
-     *     security={{"bearerAuth":{}}},
+     *     security={{"bearerAuth":{}}}, 
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -89,11 +105,11 @@ class AddressController extends Controller
      *     @OA\Response(response=404, description="Not Found")
      * )
      */
-    public function update(Request $request, $id)
+    public function update(AddressRequest $request, $id): JsonResponse
     {
         $address = Address::findOrFail($id);
-        $address->update($request->all());
-        return response()->json($address);
+        $address->update($request->validated());
+        return response()->json(new AddressResource($address));
     }
 
     /**
@@ -101,15 +117,15 @@ class AddressController extends Controller
      *     path="/api/addresses/{id}",
      *     summary="Delete an address",
      *     tags={"Addresses"},
-     *     security={{"bearerAuth":{}}},
+     *     security={{"bearerAuth":{}}}, 
      *     @OA\Response(response=200, description="Address deleted"),
      *     @OA\Response(response=404, description="Not Found")
      * )
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $address = Address::findOrFail($id);
         $address->delete();
-        return response()->json(["message" => "Address deleted"], 200);
+        return response()->json(['message' => 'Address deleted successfully'], 200);
     }
 }
